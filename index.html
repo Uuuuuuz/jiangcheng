@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>联盟卫生安全局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;900&display=swap">
+<style>
+/* 布局：政务门户——机构抬头 + 导航条 + 提示横幅；主体两栏（新闻/公告），下面是政务公开、公开档案、互动交流、专题、便民服务，信息多而杂 */
+:root{
+  --bg:#f3f5f7;--surface:#ffffff;--ink:#1c232b;--muted:#5d6874;--line:#d8dee4;
+  --brand:#1d4b84;--brand-ink:#ffffff;--alert:#a8261d;--alert-soft:#fbeceb;--tag:#e9eff6;
+  --band1:#e6eef7;--band2:#f6efe3;--band3:#e9f2ec;--band4:#f4e9ea;
+  --leak-bg:#0f1412;--leak-ink:#cfe9d4;--leak-dim:#6f8a76;--redact:#05080a;
+  --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:Consolas,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12171d;--surface:#1a2129;--ink:#e3e8ee;--muted:#9aa6b2;--line:#2c3540;
+  --brand:#2b5e9c;--brand-ink:#ffffff;--alert:#e0574c;--alert-soft:#2b1a19;--tag:#22303f;
+  --band1:#1d2a38;--band2:#2c2619;--band3:#1c2a22;--band4:#2d1f22;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12171d;--surface:#1a2129;--ink:#e3e8ee;--muted:#9aa6b2;--line:#2c3540;
+  --brand:#2b5e9c;--brand-ink:#ffffff;--alert:#e0574c;--alert-soft:#2b1a19;--tag:#22303f;
+  --band1:#1d2a38;--band2:#2c2619;--band3:#1c2a22;--band4:#2d1f22;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--brand);text-decoration:underline}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:16px}
+.util{background:var(--surface);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.util .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:6px}
+.util nav{display:flex;gap:14px;flex-wrap:wrap}
+header.mast{background:var(--surface)}
+.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-block:20px}
+.org{display:flex;align-items:center;gap:16px;min-width:0}
+.seal{flex:none;width:62px;height:62px}
+.org h1{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.2vw,30px);letter-spacing:.08em;margin:0;line-height:1.25}
+.org p{margin:2px 0 0;color:var(--muted);font-size:13px;letter-spacing:.12em}
+.search{display:flex;min-width:0;flex:0 1 340px;flex-direction:column;gap:4px}
+.search div{display:flex}
+.search input{flex:1;min-width:0;border:1px solid var(--line);border-right:0;padding:8px 12px;font:inherit;background:var(--bg);color:var(--ink)}
+.search button{border:0;background:var(--brand);color:var(--brand-ink);padding:0 18px;font:inherit;cursor:pointer}
+.search small{color:var(--muted);font-size:12px}
+nav.main{background:var(--brand)}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
+nav.main a{display:block;color:var(--brand-ink);padding:11px 20px;font-size:15.5px;letter-spacing:.06em}
+nav.main a:hover{background:rgba(255,255,255,.12);text-decoration:none;color:var(--brand-ink)}
+nav.main a[aria-current]{background:rgba(0,0,0,.18)}
+.ribbon{background:var(--alert-soft);border-bottom:1px solid var(--line)}
+.ribbon .wrap{display:flex;gap:12px;align-items:baseline;padding-block:9px;flex-wrap:wrap;font-size:14px}
+.ribbon b{background:var(--alert);color:#fff;font-weight:500;font-size:12.5px;padding:2px 8px;letter-spacing:.1em}
+.ribbon span{color:var(--alert)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;padding-block:22px}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+.panel{background:var(--surface);border:1px solid var(--line);min-width:0}
+.panel h2{margin:0;font-family:var(--serif);font-weight:600;font-size:18px;padding:11px 18px;border-bottom:2px solid var(--brand);display:flex;justify-content:space-between;align-items:baseline;gap:12px;letter-spacing:.06em}
+.panel h2 small{font-family:var(--sans);font-weight:400;font-size:12.5px;color:var(--muted);letter-spacing:0}
+.list{list-style:none;margin:0;padding:4px 18px 10px}
+.list li{display:flex;gap:14px;justify-content:space-between;border-bottom:1px dashed var(--line);padding:8px 0;min-width:0}
+.list li:last-child{border-bottom:0}
+.list a{min-width:0}
+.list time{flex:none;color:var(--muted);font-variant-numeric:tabular-nums;font-size:13.5px}
+.lead{padding:16px 18px;border-bottom:1px solid var(--line)}
+.lead h3{font-family:var(--serif);font-size:21px;margin:0 0 6px;text-wrap:balance;line-height:1.45}
+.lead p{margin:0;color:var(--muted);max-width:64ch}
+.tag{display:inline-block;font-size:12px;background:var(--tag);color:var(--brand);padding:0 6px;margin-right:6px;vertical-align:1px}
+.tag.red{background:var(--alert-soft);color:var(--alert)}
+.side{display:grid;gap:22px;align-content:start}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--line)}
+.tiles div{background:var(--surface);padding:12px 14px}
+.tiles b{display:block;font-weight:500}
+.tiles span{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.open{display:grid;grid-template-columns:200px minmax(0,1fr)}
+@media (max-width:640px){.open{grid-template-columns:1fr}}
+.open ul.cats{list-style:none;margin:0;padding:10px 0;border-right:1px solid var(--line)}
+.open ul.cats li{padding:7px 18px;color:var(--muted)}
+.open ul.cats li.on{color:var(--brand);font-weight:500;background:var(--tag)}
+.docs{padding:6px 18px 14px}
+.docs details{border-bottom:1px dashed var(--line);padding:8px 0}
+.docs summary{cursor:pointer;display:flex;justify-content:space-between;gap:14px;list-style:none}
+.docs summary::-webkit-details-marker{display:none}
+.docs summary span{min-width:0}
+.docs summary em{flex:none;font-style:normal;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.docs .no{display:block;color:var(--muted);font-size:12.5px}
+.docs p{margin:8px 0 2px;color:var(--muted);max-width:68ch;font-size:14.5px}
+.bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px;padding:16px 18px}
+.band{padding:16px 18px;border:1px solid var(--line)}
+.band b{display:block;font-family:var(--serif);font-size:19px;letter-spacing:.12em}
+.band span{color:var(--muted);font-size:13px}
+.b1{background:var(--band1)}.b2{background:var(--band2)}.b3{background:var(--band3)}.b4{background:var(--band4)}
+.qa{padding:4px 18px 12px}
+.qa div{border-bottom:1px dashed var(--line);padding:10px 0}
+.qa div:last-child{border-bottom:0}
+.qa .q{font-weight:500}
+.qa .q small{color:var(--muted);font-weight:400;margin-left:8px;font-variant-numeric:tabular-nums}
+.qa .a{color:var(--muted);margin-top:4px;padding-left:12px;border-left:2px solid var(--line);font-size:14.5px}
+.query form{display:flex;gap:10px;flex-wrap:wrap;padding:16px 18px 4px}
+.query label{width:100%;color:var(--muted);font-size:13.5px}
+.query input{flex:1 1 260px;min-width:0;border:1px solid var(--line);padding:9px 12px;font:inherit;background:var(--bg);color:var(--ink)}
+.query button{border:0;background:var(--brand);color:var(--brand-ink);padding:9px 26px;font:inherit;cursor:pointer}
+.result{margin:8px 18px 16px;padding:10px 14px;border-left:3px solid var(--line);background:var(--bg);color:var(--muted);min-height:1.7em}
+.result.deny{border-color:var(--alert);color:var(--alert)}
+.leak{margin:0 18px 18px;background:var(--leak-bg);color:var(--leak-ink);font-family:var(--mono);font-size:14px;padding:18px;overflow-x:auto}
+.leak .hdr{color:var(--leak-dim);margin-bottom:12px}
+.card{border:1px solid #2b3a30;padding:12px 14px;margin-bottom:12px;font-family:var(--sans)}
+.card h4{margin:0 0 4px;font-family:var(--mono);color:#e8f5ea;font-weight:500}
+.card p{margin:0}
+.rd{display:inline-block;background:var(--redact);color:transparent;border:1px solid #233;min-width:6em;user-select:none}
+.cursor{display:inline-block;width:.55em;height:1.1em;background:var(--leak-ink);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;padding:12px 18px;color:var(--muted);font-size:13.5px}
+footer{border-top:3px solid var(--brand);background:var(--surface);color:var(--muted);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:18px}
+footer .row{width:100%;display:flex;flex-wrap:wrap;gap:8px 18px}
+.whisper{color:var(--surface);font-family:var(--mono);font-size:12px;width:100%}
+.whisper::selection{background:var(--ink);color:var(--surface)}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="wrap">
+  <span>今天是 2026 年 7 月 15 日　星期三　宁都　晴　26～32℃</span>
+  <nav aria-label="辅助功能"><a href="#top">无障碍浏览</a><a href="#top">长者模式</a><a href="#top">繁體</a><a href="#top">English</a><a href="#top">政务服务网</a></nav>
+</div></div>
+
+<header class="mast"><div class="wrap">
+  <div class="org">
+    <svg class="seal" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="30" fill="none" stroke="var(--alert)" stroke-width="2.5"/>
+      <circle cx="32" cy="32" r="24" fill="none" stroke="var(--alert)" stroke-width="1"/>
+      <path d="M14 38 C22 32, 28 42, 36 36 S 48 30, 50 34" fill="none" stroke="var(--brand)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M32 14 L35 22 L32 30 L29 22 Z" fill="var(--alert)"/>
+      <path d="M20 46 H44" stroke="var(--brand)" stroke-width="2"/>
+    </svg>
+    <div>
+      <h1>开放共和联盟卫生安全局</h1>
+      <p>OPEN REPUBLIC ALLIANCE · HEALTH SECURITY ADMINISTRATION</p>
+    </div>
+  </div>
+  <form class="search" role="search" id="s-form">
+    <div><input id="site-search" type="search" placeholder="请输入关键词" aria-label="站内搜索"><button type="submit">搜索</button></div>
+    <small>热搜：观察营解除时间　安置营探视　高考考点　人工消雨　寻亲登记</small>
+  </form>
+</div></header>
+
+<nav class="main" aria-label="主导航"><div class="wrap"><ul>
+  <li><a href="#top" aria-current="page">首页</a></li>
+  <li><a href="#org">机构概况</a></li>
+  <li><a href="#gov">政务公开</a></li>
+  <li><a href="#news">新闻中心</a></li>
+  <li><a href="#archive">公开档案</a></li>
+  <li><a href="#topic">专题专栏</a></li>
+  <li><a href="#service">便民服务</a></li>
+</ul></div></nav>
+
+<div class="ribbon"><div class="wrap">
+  <b>紧急状态</b>
+  <span>全国一级生物安全紧急状态持续中。</span>
+  <span style="color:var(--muted)">江城、滨海两市为江滨株一级封控区，国家防疫隔离带内禁止任何人员、车辆、船只通行。请以本平台发布的信息为准。</span>
+</div></div>
+
+<main id="top"><div class="wrap grid">
+
+  <section class="panel" id="news" aria-labelledby="news-h">
+    <h2 id="news-h">新闻中心 <small>局务动态　|　地方动态　|　图片新闻</small></h2>
+    <div class="lead">
+      <h3>风雨同舟　守望相助——联盟各地驰援江城、滨海同胞纪实</h3>
+      <p>连日来，联盟各地各部门闻令而动，物资车辆昼夜兼程，医护人员、志愿者坚守一线，为转运同胞送去温暖。</p>
+    </div>
+    <ul class="list">
+      <li><a href="#news">局领导赴北郊安置营看望慰问转运人员</a><time>07-14</time></li>
+      <li><a href="#news">局务会议研究部署下半年重点工作</a><time>07-13</time></li>
+      <li><a href="#news">全局开展「文明健康　守护有我」主题志愿服务活动</a><time>07-12</time></li>
+      <li><a href="#news">卫生安全局召开保密工作专题会议</a><time>07-11</time></li>
+      <li><a href="#news">2026 年联盟食品安全宣传周在宁都启动</a><time>07-10</time></li>
+      <li><a href="#news">我局举办突发公共卫生事件应急演练观摩活动</a><time>07-08</time></li>
+      <li><a href="#news">宁都市民健身月活动火热进行</a><time>07-06</time></li>
+      <li><a href="#news">联盟爱国卫生运动推进会召开</a><time>07-03</time></li>
+    </ul>
+  </section>
+
+  <aside class="side">
+    <section class="panel" aria-labelledby="notice-h">
+      <h2 id="notice-h">通知公告</h2>
+      <ul class="list">
+        <li><a href="#notice"><span class="tag red">置顶</span>暑期防溺水安全提示</a><time>07-14</time></li>
+        <li><a href="#notice">关于调整本局对外办公时间的通知</a><time>07-09</time></li>
+        <li><a href="#notice">城外观察营探视管理规定</a><time>07-08</time></li>
+        <li><a href="#notice">外环生态隔离带施工交通管制</a><time>06-28</time></li>
+        <li><a href="#notice">2026 年度公务员考录体检工作安排</a><time>06-20</time></li>
+      </ul>
+    </section>
+    <section class="panel" aria-labelledby="data-h">
+      <h2 id="data-h">数据发布</h2>
+      <div class="tiles">
+        <div><b>0</b><span>宁都新增病例</span></div>
+        <div><b>18 天</b><span>连续零新增</span></div>
+        <div><b>99.2%</b><span>热线满意率</span></div>
+        <div><b>充足</b><span>生活物资储备</span></div>
+      </div>
+    </section>
+  </aside>
+
+  <section class="panel full" id="gov" aria-labelledby="gov-h">
+    <h2 id="gov-h">政务公开 <small>机构职能　领导信息　规划计划　财政预决算　政府采购　人事信息　统计数据</small></h2>
+    <ul class="list">
+      <li><a href="#gov"><span class="tag">采购</span>北郊安置营折叠床及床上用品采购项目中标结果公告</a><time>07-13</time></li>
+      <li><a href="#gov"><span class="tag">采购</span>外环生态隔离带照明工程公开招标公告</a><time>07-10</time></li>
+      <li><a href="#gov"><span class="tag">采购</span>红外体温检测设备（第三批）采购结果公告</a><time>07-07</time></li>
+      <li><a href="#gov"><span class="tag">采购</span>江城方向无人机巡查服务单一来源采购公示</a><time>07-05</time></li>
+      <li><a href="#gov"><span class="tag">人事</span>2026 年度事业单位公开招聘拟聘用人员公示</a><time>07-01</time></li>
+      <li><a href="#gov"><span class="tag">财政</span>卫生安全局 2025 年度部门决算公开</a><time>06-15</time></li>
+    </ul>
+  </section>
+
+  <section class="panel full" id="archive" aria-labelledby="archive-h">
+    <h2 id="archive-h">公开档案 <small>依申请公开　|　主动公开</small></h2>
+    <div class="open">
+      <ul class="cats">
+        <li class="on">疫情防控</li><li>情况说明</li><li>安置保障</li><li>政策解读</li><li>历史档案</li>
+      </ul>
+      <div class="docs">
+        <details><summary><span>致江城、滨海同胞的一封信<span class="no">卫安发〔2026〕41 号</span></span><em>06-27</em></summary>
+          <p>亲爱的同胞们：你们辛苦了。国家不会忘记你们，联盟各地都在为你们加油。请大家相信科学、相信组织，坚定信心、同舟共济，我们一定能够战胜这场灾难。</p></details>
+        <details><summary><span>关于网传「江城夜间灯光异常」的情况说明<span class="no">卫安函〔2026〕77 号</span></span><em>07-12</em></summary>
+          <p>近日有市民反映，夜间可见江城方向灯光规律亮灭。经核实，该现象系江城电网实行分区限时供电所致，属正常现象。请广大市民不要猜测，不要传播。</p></details>
+        <details><summary><span>关于江城频段持续广播信号的说明<span class="no">卫安函〔2026〕69 号</span></span><em>07-10</em></summary>
+          <p>江城频段目前接收到的广播信号，为无人值守播出设备自动循环播放，内容无更新，不代表江城当前情况，请勿据此判断。</p></details>
+        <details><summary><span>关于江面锚泊观察船只人员全部安全转运的通报<span class="no">卫安通〔2026〕19 号</span></span><em>07-06</em></summary>
+          <p>截至 7 月 5 日 18 时，江面锚泊观察船只上的人员已全部安全转运至城外观察营，各项生活保障到位，情绪稳定。</p></details>
+        <details><summary><span>北郊安置营生活保障情况通报<span class="no">卫安通〔2026〕21 号</span></span><em>07-13</em></summary>
+          <p>北郊安置营统一提供食宿，饮用水、食品、药品储备充足，设有临时学校、临时考场和心理疏导站，转运人员生活安定有序。</p></details>
+        <details><summary><span>江滨株防控工作答记者问（第九场）</span><em>07-09</em></summary>
+          <p>问：江滨株会不会传到宁都？答：宁都已建立城外观察营、入城检疫和外环生态隔离带三道防线，防控措施科学有效，请市民放心。</p></details>
+        <details><summary><span>宁都市民科学防疫指引（第三版）</span><em>07-04</em></summary>
+          <p>勤洗手、常通风、少聚集；雨天减少外出，不接触积水；出现发热请就地隔离，拨打 12320。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel full query" id="query" aria-labelledby="query-h">
+    <h2 id="query-h">档案查询</h2>
+    <form id="q-form">
+      <label for="q-input">请输入档案编号、文号或关键词</label>
+      <input id="q-input" type="text" autocomplete="off" spellcheck="false" placeholder="例如：卫安发〔2026〕41 号">
+      <button type="submit">查询</button>
+    </form>
+    <div class="result" id="q-result" aria-live="polite">仅提供主动公开档案查询。</div>
+    <div class="leak" id="leak" hidden>
+      <div class="hdr">// 不是这里能看的东西。我放进来了。　—— 一位黑客<br>// 卫安内〔2026〕0627 号 · 江滨株现场行为观察（节选）· 涂黑部分为原件所有</div>
+      <div class="card"><h4>分期标准（摘录）</h4><p>三期：保留原始运动与习惯性行为；丧失需要协调的能力；丧失对外界的回应。本组内部称：失能。</p></div>
+      <div class="card"><h4>JC-01-A</h4><p>降雨中，感染体对幸存者发出的声音作出反应，追击距离约 120 米。</p></div>
+      <div class="card"><h4>JC-02-A</h4><p>目标离开后，感染体沿目标经过的路线移动一段距离后停止。停止时的降雨量：<span class="rd">已涂黑</span></p></div>
+      <div class="card"><h4>JC-03-A</h4><p>工作人员着全套防护服。感染体向光源和人员走动的方向聚集，未发起 <span class="rd">已涂黑</span></p></div>
+      <div class="card"><h4>JC-04-A</h4><p>目标停止发光、发声并远离后，感染体失去目标。</p></div>
+      <div class="card"><h4>待查</h4><p>发热人员与感染体同处一室，未见攻击。样本 2 例。</p></div>
+      <div class="card"><h4>补充 · JC-01-A / JC-02-A</h4><p>被观察者体液与唾液大量分泌。该个体既往有吞咽功能障碍。同类个体的分泌量，显著多于其他感染体。</p></div>
+      <div class="card"><h4>评估</h4><p>评估对象：江城<br>原始运动：保留　习惯性行为：保留<br>需要协调的能力：丧失　对外界的回应：丧失<br>分期：<span class="cursor" aria-hidden="true"></span></p></div>
+    </div>
+  </section>
+
+
+  <aside class="side full" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">
+    <section class="panel" id="service" aria-labelledby="service-h">
+      <h2 id="service-h">便民服务</h2>
+      <div class="tiles">
+        <div><b>寻亲登记</b><span>安置营名单</span></div>
+        <div><b>观察营查询</b><span>入营 / 解除</span></div>
+        <div><b>防疫热线</b><span>12320</span></div>
+        <div><b>心理援助</b><span>400-161-9995</span></div>
+        <div><b>电子证照</b><span>身份 · 健康</span></div>
+        <div><b>公积金</b><span>查询 / 提取</span></div>
+        <div><b>违章查询</b><span>机动车</span></div>
+        <div><b>天气预报</b><span>宁都 晴</span></div>
+      </div>
+    </section>
+    <section class="panel" id="org" aria-labelledby="org-h">
+      <h2 id="org-h">机构概况</h2>
+      <ul class="list">
+        <li><a href="#org">机构职能</a><time>›</time></li>
+        <li><a href="#org">内设机构</a><time>›</time></li>
+        <li><a href="#org">直属单位：国家病理实验室</a><time>›</time></li>
+        <li><a href="#org">直属单位：疾病控制中心</a><time>›</time></li>
+      </ul>
+    </section>
+  </aside>
+
+  <section class="panel full" id="topic" aria-labelledby="topic-h">
+    <h2 id="topic-h">专题专栏</h2>
+    <div class="bands">
+      <div class="band b1"><b>风雨同舟　守望相助</b><span>驰援江城、滨海专题</span></div>
+      <div class="band b2"><b>文明健康　守护有我</b><span>爱国卫生月</span></div>
+      <div class="band b3"><b>防溺水　安全一夏</b><span>暑期安全教育</span></div>
+      <div class="band b4"><b>保密就是保安全</b><span>保密宣传教育月</span></div>
+    </div>
+    <div class="links">
+      <span>友情链接：</span><a href="#topic">联盟执政委员会</a><a href="#topic">联盟气象局</a><a href="#topic">宁都市人民政府</a><a href="#topic">宁都人民广播电台</a><a href="#topic">联盟证券交易所</a><a href="#topic">国际卫生组织</a>
+    </div>
+  </section>
+
+</div></main>
+
+<footer><div class="wrap">
+  <div class="row"><a href="#top">网站地图</a><a href="#top">联系我们</a><a href="#top">隐私声明</a><a href="#top">使用帮助</a><a href="#top">纠错</a></div>
+  <span>主办：开放共和联盟卫生安全局　承办：联盟国家病理实验室信息中心　地址：宁都市东城区安平路 6 号</span>
+  <span>网站标识码 3700000627　·　联 ICP 备 0627 号　·　本站为虚构作品《江城口述》的一部分</span>
+</div></footer>
+
+<script>
+(function(){
+  var docs=[].slice.call(document.querySelectorAll('.docs details'));
+  function findDocs(v){return docs.filter(function(d){return d.textContent.replace(/\s+/g,'').indexOf(v)>-1;});}
+  var form=document.getElementById('q-form'),input=document.getElementById('q-input'),
+      out=document.getElementById('q-result'),leak=document.getElementById('leak');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var raw=(input.value||'').trim(),v=raw.replace(/\s+/g,''),up=v.toUpperCase();
+    out.classList.remove('deny');
+    if(!v){out.textContent='请输入档案编号、文号或关键词。';return;}
+    var key=v.replace(/[〔〕\[\]()（）【】号\s]/g,'');
+    if(key==='卫安内20260627'){
+      out.textContent='查询结果：0 条主动公开档案。该文号未在公开目录中登记。';
+      leak.hidden=false;
+      leak.scrollIntoView({behavior:'smooth',block:'nearest'});
+      return;
+    }
+    if(/^JC-?0\d-?A$/.test(up)||/^EX-?0\d$/.test(up)){
+      out.classList.add('deny');
+      out.textContent='档案 '+up+' 属内部资料，不予公开。如需查阅，请经所在单位向卫生安全局提出申请。';
+      return;
+    }
+    var hit=findDocs(v);
+    if(hit.length){
+      out.textContent='查询到 '+hit.length+' 条主动公开档案，已在上方「公开档案」中展开。';
+      hit.forEach(function(d){d.open=true;});
+      hit[0].scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+    out.textContent='未查询到与「'+raw+'」相关的主动公开档案。';
+  });
+  document.getElementById('s-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('site-search').value.trim();
+    input.value=v; form.requestSubmit();
+    document.getElementById('query').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+</body>
+</html>
